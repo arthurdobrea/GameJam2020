@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class Player : MonoBehaviour
 {
@@ -11,21 +12,16 @@ public class Player : MonoBehaviour
     public Image damageScreen;
     public float damage;
     public Camera cam;
-
     public GameObject weapon;
-
     private bool canAttack = true;
-    
     public CharacterController player;
-
     public GameObject startPointOfRay;
-
     private Ray ray;
     private float moveF;
     private float moveB;
-
     private float rotX;
     private float rotY;
+    public GameManager gameManager;
 
     void Start()
     {
@@ -38,20 +34,38 @@ public class Player : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!gameManager.mainMenuPanel.activeSelf && !gameManager.settingsPanel.activeSelf)
         {
-            Ray ray = cam.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            if (Input.GetKeyUp(KeyCode.Escape))
             {
-                weapon.transform.localPosition += Vector3.forward/6;
-                
-                StartCoroutine(DoDamage(hit));
+                Cursor.visible = false;
+                gameObject.GetComponent<FirstPersonController>().enabled = true;
+            }
+            
+            if (Input.GetMouseButtonDown(0))
+            {
+                Ray ray = cam.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+                {
+                    weapon.transform.localPosition += Vector3.forward / 6;
+
+                    StartCoroutine(DoDamage(hit));
+                }
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                weapon.transform.localPosition += Vector3.back / 6;
             }
         }
-        if (Input.GetMouseButtonUp(0))
+        else
         {
-            weapon.transform.localPosition += Vector3.back/6;
+            if (Input.GetKeyUp(KeyCode.Escape))
+            {
+                Cursor.visible = true;
+                gameObject.GetComponent<FirstPersonController>().enabled = false;
+            }
         }
     }
     
