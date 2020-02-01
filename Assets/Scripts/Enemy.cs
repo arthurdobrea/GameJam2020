@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     private Vector3 playerPosition;
     private float agroRadius;
     private Player playerScript;
+    private float health = 20;
 
     public GameObject currentLocationToScout;
 
@@ -40,7 +41,7 @@ public class Enemy : MonoBehaviour
 
         if (Vector3.Distance(transform.position, currentLocationToScout.transform.position) < 5)
         {
-            Debug.Log(Vector3.Distance(transform.position, currentLocationToScout.transform.position));
+            // Debug.Log(Vector3.Distance(transform.position, currentLocationToScout.transform.position));
             currentLocationToScout = positionsToScout[range];
             agent.SetDestination(currentLocationToScout.transform.position);
         }
@@ -72,20 +73,29 @@ public class Enemy : MonoBehaviour
             Scout();
         }
 
-        // if (distance <= 10f)
-        // {
-        //     if (playerToFollow.activeSelf)
-        //     {
-        //         if (attackSpeed >= 3)
-        //         {
-        //             playerScript.takeDamage();
-        //             attackSpeed = 0;
-        //         }
-        //         else
-        //         {
-        //             attackSpeed += 1 * Time.deltaTime;
-        //         }  
-        //     }
-        // }
+        if (distance <= 10f)
+        {
+            if (playerToFollow.activeSelf)
+            {
+                if (attackSpeed >= 3)
+                {
+                    playerScript.takeDamage();
+                    attackSpeed = 0;
+                }
+                else
+                {
+                    attackSpeed += 1 * Time.deltaTime;
+                }  
+            }
+        }
+    }
+    
+    public void takeDamage()
+    {
+        health -= 10;
+        if (health <= 0)
+        {
+            gameObject.SetActive(false);
+        }
     }
 }
