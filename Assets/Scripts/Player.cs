@@ -138,6 +138,7 @@ public class Player : MonoBehaviour
             {
                 if (canAttack)
                 {
+                    // SoundManager.playSound("playerHitSound");
                     canAttack = false;
                     hit.transform.gameObject.GetComponent<Enemy>().TakeDamage(damage);
                     yield return new WaitForSeconds(1);

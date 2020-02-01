@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PickMaterial : MonoBehaviour
 {
@@ -19,8 +17,7 @@ public class PickMaterial : MonoBehaviour
                 {
                     if (Vector3.Distance(transform.position, hit.collider.gameObject.transform.position) < 4)
                     {
-                        
-                        countOfMaterials+=2;
+                        countOfMaterials += 2;
                         Destroy(hit.collider.gameObject);
                     }
                 }
