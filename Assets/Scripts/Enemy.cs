@@ -56,6 +56,7 @@ public class Enemy : MonoBehaviour
     private void Move(Vector3 p)
     {
         agent.SetDestination(p);
+        SoundManager.playSound("robMoving");
         animator.Play("Run");
     }
 
@@ -108,6 +109,7 @@ public class Enemy : MonoBehaviour
         Debug.Log(health);
         if (health <= 0)
         {
+            SoundManager.playSound("die");
             animator.Play("Death");
             dead = true;
             agent.Stop();
@@ -116,6 +118,7 @@ public class Enemy : MonoBehaviour
 
     public void DoDamage(float damage)
     {
+        SoundManager.playSound("hitSound");
         playerToFollow.GetComponent<Player>().TakeDamage(damage);
         animator.Play("Attack");
     }

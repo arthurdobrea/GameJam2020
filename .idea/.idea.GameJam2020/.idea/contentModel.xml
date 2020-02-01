@@ -17,6 +17,7 @@
         </e>
         <e p="CanBeRepaired.cs" t="Include" />
         <e p="CustomCamera.cs" t="Include" />
+        <e p="EngingSoundManager.cs" t="Include" />
         <e p="NavMeshComponents" t="Include">
           <e p="Editor" t="Include">
             <e p="NavMeshAssetManager.cs" t="Include" />

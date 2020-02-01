@@ -17,6 +17,7 @@ public class PickMaterial : MonoBehaviour
                 {
                     if (Vector3.Distance(transform.position, hit.collider.gameObject.transform.position) < 4)
                     {
+                        SoundManager.playSound("take");
                         countOfMaterials += 2;
                         Destroy(hit.collider.gameObject);
                     }

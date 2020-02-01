@@ -78,6 +78,7 @@ public class Repair : MonoBehaviour
         
                     if (myMaterials.canIrepair())
                     {
+                        SoundManager.playSound("engine");
                         engine.repair();
                     }
                 }

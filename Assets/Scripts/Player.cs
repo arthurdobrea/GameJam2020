@@ -131,6 +131,7 @@ public class Player : MonoBehaviour
     
     IEnumerator DoDamage(RaycastHit hit)
     {
+        SoundManager.playSound("hitSound");
         float distance = Vector3.Distance(this.transform.position, hit.point);
         if (distance <= 2)
         {
@@ -151,6 +152,7 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        
         var tempColor = damageScreen.color;
         tempColor.a = 1f;
         damageScreen.color = tempColor;
