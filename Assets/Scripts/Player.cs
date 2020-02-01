@@ -33,7 +33,6 @@ public class Player : MonoBehaviour
         tempColor.a = 0f;
         damageScreen.color = tempColor;
         // player = GetComponent<CharacterController>();
-
     }
 
     
@@ -45,14 +44,14 @@ public class Player : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
-                weapon.transform.localPosition += Vector3.forward/4;
+                weapon.transform.localPosition += Vector3.forward/6;
+                
                 StartCoroutine(DoDamage(hit));
             }
         }
-
         if (Input.GetMouseButtonUp(0))
         {
-            weapon.transform.localPosition += Vector3.back/4;
+            weapon.transform.localPosition += Vector3.back/6;
         }
     }
     

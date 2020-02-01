@@ -311,7 +311,7 @@ MonoBehaviour:
     type: 3}
   damage: 10
   cam: {fileID: 8666407112574882656}
-  weapon: {fileID: 8928652710285738819, guid: 788ea2c188dc4ed46b0edabce42afa79, type: 3}
+  weapon: {fileID: 477839768053479818, guid: 3e17b2c1f342b4f4ea9b73c0c53ad4d6, type: 3}
   player: {fileID: 0}
   startPointOfRay: {fileID: 0}
 --- !u!114 &8666407112881752342
