@@ -12,14 +12,14 @@ public class Enemy : MonoBehaviour
     public NavMeshAgent agent;
     public GameObject[] positionsToScout;
     public float attackSpeed;
-    private Animator animator;
+    public Animator animator;
 
     private Vector3 selfPosition;
     private Vector3 playerPosition;
     private float agroRadius;
     private Player playerScript;
-    private float health = 20;
-
+    public float health;
+    private bool dead = false;
     public GameObject currentLocationToScout;
 
     // Start is called before the first frame update
@@ -27,8 +27,8 @@ public class Enemy : MonoBehaviour
     {
         playerScript = playerToFollow.GetComponent<Player>();
         agent.GetComponent<NavMeshAgent>();
-        // animator.GetComponent<Animator>();
-        // animator.SetFloat("InputY", -1); // Idle
+        animator.GetComponent<Animator>();
+        animator.Play("Idle");
     }
 
     private void OnDrawGizmos()
@@ -45,77 +45,78 @@ public class Enemy : MonoBehaviour
         {
             // Debug.Log(Vector3.Distance(transform.position, currentLocationToScout.transform.position));
             currentLocationToScout = positionsToScout[range];
-            agent.SetDestination(currentLocationToScout.transform.position);
+            Move(currentLocationToScout.transform.position);
         }
         else
         {
-            agent.SetDestination(currentLocationToScout.transform.position);
+            Move(currentLocationToScout.transform.position);
         }
     }
 
     private void Move(Vector3 p)
     {
         agent.SetDestination(p);
-        animator.SetFloat("InputY", 0); // Run
+        animator.Play("Run");
     }
 
     // Update is called once per frame
     void Update()
     {
-        DoDamage(10);
         selfPosition = transform.position;
         playerPosition = playerToFollow.transform.position;
         float distance = Vector3.Distance(selfPosition, playerPosition);
 
-        if (distance <= 20f)
+        if (!dead)
         {
-            Quaternion lookAtPlayer = Quaternion.LookRotation(playerPosition - selfPosition);
-
-            lookAtPlayer.x = 0;
-            lookAtPlayer.z = 0;
-
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookAtPlayer, 7F * Time.deltaTime);
-            agent.SetDestination(playerPosition);
-        }
-        else
-        {
-            Scout();
-        }
-        DoDamage(10);
-        if (distance <= 10f)
-        {
-            if (playerToFollow.activeSelf)
+            if (distance <= 2f)
             {
-                if (attackSpeed >= 3)
+                agent.Stop();
+                if (playerToFollow.activeSelf)
                 {
-                    DoDamage(10);
-                    attackSpeed = 0;
+                    if (attackSpeed >= 3)
+                    {
+                        DoDamage(10);
+                        attackSpeed = 0;
+                    }
+                    else
+                    {
+                        attackSpeed += 1 * Time.deltaTime;
+                    }
                 }
-                else
-                {
-                    attackSpeed += 1 * Time.deltaTime;
-                }
+            }
+            else if (distance <= 10f)
+            {
+                agent.Resume();
+                Quaternion lookAtPlayer = Quaternion.LookRotation(playerPosition - selfPosition);
+
+                lookAtPlayer.x = 0;
+                lookAtPlayer.z = 0;
+
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookAtPlayer, 7F * Time.deltaTime);
+                agent.SetDestination(playerPosition);
+            }
+            else
+            {
+                Scout();
             }
         }
     }
 
-    public void takeDamage()
+    public void TakeDamage(float damage)
     {
-        health -= 10;
+        health -= damage;
+        Debug.Log(health);
         if (health <= 0)
         {
-            gameObject.SetActive(false);
+            animator.Play("Death");
+            dead = true;
+            agent.Stop();
         }
     }
 
-    public void DoDamage(int damage)
+    public void DoDamage(float damage)
     {
-        // Debug.Log("Here");
-        // animator.SetFloat("InputY", 1); // Attack
-        playerToFollow.GetComponent<Player>().health -= damage;
-        if (playerToFollow.GetComponent<Player>().health <= 0)
-        {
-            Application.Quit();
-        }
+        playerToFollow.GetComponent<Player>().TakeDamage(damage);
+        animator.Play("Attack");
     }
 }
