@@ -15,6 +15,7 @@
             </e>
           </e>
         </e>
+        <e p="CanBeRepaired.cs" t="Include" />
         <e p="CustomCamera.cs" t="Include" />
         <e p="NavMeshComponents" t="Include">
           <e p="Editor" t="Include">
@@ -34,6 +35,8 @@
             <e p="NavMeshSurface.cs" t="Include" />
           </e>
         </e>
+        <e p="PickMaterial.cs" t="Include" />
+        <e p="Repair.cs" t="Include" />
         <e p="SampleScenes" t="Include">
           <e p="Menu" t="Include">
             <e p="Scripts" t="Include">

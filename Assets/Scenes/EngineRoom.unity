@@ -4632,6 +4632,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: generator (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 130254, guid: 562f0bb8ba91fe844baf976e5806516d, type: 3}
+      propertyPath: m_TagString
+      value: Engine
+      objectReference: {fileID: 0}
     - target: {fileID: 413772, guid: 562f0bb8ba91fe844baf976e5806516d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 54.5
@@ -8725,6 +8729,10 @@ PrefabInstance:
     - target: {fileID: 130254, guid: 562f0bb8ba91fe844baf976e5806516d, type: 3}
       propertyPath: m_Name
       value: generator
+      objectReference: {fileID: 0}
+    - target: {fileID: 130254, guid: 562f0bb8ba91fe844baf976e5806516d, type: 3}
+      propertyPath: m_TagString
+      value: Engine
       objectReference: {fileID: 0}
     - target: {fileID: 413772, guid: 562f0bb8ba91fe844baf976e5806516d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -29974,6 +29982,19 @@ MonoBehaviour:
   player: {fileID: 0}
   camera: {fileID: 0}
   startPointOfRay: {fileID: 0}
+--- !u!114 &1908266593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908266586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61b21a81253bb1b45a920253409f5e60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightMaterial: {fileID: 2100004, guid: 234c5d0c3948549bd9657592e4d58471, type: 3}
 --- !u!1001 &1909167676
 PrefabInstance:
   m_ObjectHideFlags: 0
