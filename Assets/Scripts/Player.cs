@@ -22,46 +22,46 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        player = GetComponent<CharacterController>();
+        // player = GetComponent<CharacterController>();
 
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("I pressedMouse");
-
-            RaycastHit rayHit;
-
-            Debug.DrawRay(startPointOfRay.transform.position, startPointOfRay.transform.forward, Color.red, 500f);
-            if (Physics.Raycast(startPointOfRay.transform.position, startPointOfRay.transform.forward, out rayHit, 50))
-            {
-                Debug.Log("i hit " + rayHit.collider.tag);
-                if (rayHit.collider.CompareTag("Enemy"))
-                {
-                    Debug.Log("I hit an enemy");
-                    Enemy component = rayHit.collider.gameObject.GetComponent<Enemy>();
-                    component.takeDamage();
-                }
-            }
-
-        }
-
-        moveF = Input.GetAxis("Vertical") * moveSpeed;
-        moveB = Input.GetAxis("Horizontal") * moveSpeed;
-
-        rotX = Input.GetAxis("Mouse X") + sensitivity;
-        rotY = Input.GetAxis("Mouse Y") + sensitivity;
-
-        Vector3 movement = new Vector3(moveB, 0, moveF);
-        transform.Rotate(0, rotX, 0);
-        camera.transform.Rotate(-rotY, 0, 0);
-        startPointOfRay.transform.Rotate(-rotY, 0, 0);
-
-        movement = transform.rotation * movement;
-        player.Move(movement * Time.deltaTime);
+        // if (Input.GetMouseButtonDown(0))
+        // {
+        //     Debug.Log("I pressedMouse");
+        //
+        //     RaycastHit rayHit;
+        //
+        //     Debug.DrawRay(startPointOfRay.transform.position, startPointOfRay.transform.forward, Color.red, 500f);
+        //     if (Physics.Raycast(startPointOfRay.transform.position, startPointOfRay.transform.forward, out rayHit, 50))
+        //     {
+        //         Debug.Log("i hit " + rayHit.collider.tag);
+        //         if (rayHit.collider.CompareTag("Enemy"))
+        //         {
+        //             Debug.Log("I hit an enemy");
+        //             Enemy component = rayHit.collider.gameObject.GetComponent<Enemy>();
+        //             component.takeDamage();
+        //         }
+        //     }
+        //
+        // }
+        //
+        // moveF = Input.GetAxis("Vertical") * moveSpeed;
+        // moveB = Input.GetAxis("Horizontal") * moveSpeed;
+        //
+        // rotX = Input.GetAxis("Mouse X") + sensitivity;
+        // rotY = Input.GetAxis("Mouse Y") + sensitivity;
+        //
+        // Vector3 movement = new Vector3(moveB, 0, moveF);
+        // transform.Rotate(0, rotX, 0);
+        // camera.transform.Rotate(-rotY, 0, 0);
+        // startPointOfRay.transform.Rotate(-rotY, 0, 0);
+        //
+        // movement = transform.rotation * movement;
+        // player.Move(movement * Time.deltaTime);
 
     }
 

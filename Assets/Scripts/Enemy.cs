@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 public class Enemy : MonoBehaviour
 {
     public GameObject playerToFollow;
-    private NavMeshAgent agent;
+    public NavMeshAgent agent;
     public GameObject[] positionsToScout;
     public float attackSpeed;
     private Animator animator;
@@ -27,8 +27,8 @@ public class Enemy : MonoBehaviour
     {
         playerScript = playerToFollow.GetComponent<Player>();
         agent.GetComponent<NavMeshAgent>();
-        animator.GetComponent<Animator>();
-        animator.SetFloat("InputY", -1); // Idle
+        // animator.GetComponent<Animator>();
+        // animator.SetFloat("InputY", -1); // Idle
     }
 
     private void OnDrawGizmos()
@@ -110,8 +110,8 @@ public class Enemy : MonoBehaviour
 
     public void DoDamage(int damage)
     {
-        Debug.Log("Here");
-        animator.SetFloat("InputY", 1); // Attack
+        // Debug.Log("Here");
+        // animator.SetFloat("InputY", 1); // Attack
         playerToFollow.GetComponent<Player>().health -= damage;
         if (playerToFollow.GetComponent<Player>().health <= 0)
         {
