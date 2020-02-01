@@ -4437,6 +4437,7 @@ MonoBehaviour:
   animator: {fileID: 3400057597890785098}
   health: 50
   currentLocationToScout: {fileID: 0}
+  drop: {fileID: 9199150776701211191, guid: cd4b71b0f3ca1344a94998706f1c878c, type: 3}
 --- !u!195 &-7150036292800480121
 NavMeshAgent:
   m_ObjectHideFlags: 0

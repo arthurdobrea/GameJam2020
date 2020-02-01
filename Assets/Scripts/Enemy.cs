@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
     public float health;
     private bool dead = false;
     public GameObject currentLocationToScout;
+    public GameObject drop;
 
     // Start is called before the first frame update
     void Start()
@@ -113,6 +114,9 @@ public class Enemy : MonoBehaviour
             animator.Play("Death");
             dead = true;
             agent.Stop();
+            Instantiate(drop);
+            drop.transform.position = transform.position;
+            drop.GetComponent<Rigidbody>().AddForce(transform.up * 1);
         }
     }
 
