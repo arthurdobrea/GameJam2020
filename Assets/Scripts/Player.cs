@@ -6,11 +6,12 @@ public class Player : MonoBehaviour
 {
     public float moveSpeed;
     public float sensitivity;
-    private Ray ray;
-
+    public float health;
+    
     public CharacterController player;
     public GameObject camera;
 
+    private Ray ray;
     private float moveF;
     private float moveB;
 
@@ -39,5 +40,14 @@ public class Player : MonoBehaviour
         movement = transform.rotation * movement;
         player.Move(movement * Time.deltaTime);
         
+    }
+
+    public void takeDamage()
+    {
+        health -= 10;
+        if (health <= 0)
+        {
+            gameObject.SetActive(false);
+        }
     }
 }
