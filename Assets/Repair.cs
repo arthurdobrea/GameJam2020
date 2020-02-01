@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class Repair : MonoBehaviour
 {
-    [SerializeField] private Material highlightMaterial; 
+    [SerializeField] private Material highlightMaterial;
     [SerializeField] private Material defaultMaterial;
     [SerializeField] private Material repairedMaterial;
-    
 
     private Transform _selection;
+
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -27,18 +26,18 @@ public class Repair : MonoBehaviour
 
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
+
         if (Physics.Raycast(ray, out hit))
         {
             var selection = hit.transform;
-            
-            if (hit.collider.CompareTag("Engine") || hit.collider.CompareTag("Material"))
+
+            if (hit.collider.CompareTag("Engine"))
             {
                 var selectionRenderer = selection.GetComponent<Renderer>();
                 if (selectionRenderer != null)
                 {
                     CanBeRepaired engine = selection.gameObject.GetComponent<CanBeRepaired>();
-                    Debug.Log(engine.isRepaired());
-                    
+
                     if (engine.isRepaired())
                     {
                         selectionRenderer.material = repairedMaterial;
@@ -48,22 +47,41 @@ public class Repair : MonoBehaviour
                         selectionRenderer.material = highlightMaterial;
                     }
                 }
+
                 _selection = selection;
             }
+
+            if (Physics.Raycast(ray, out hit))
+            { 
+                selection = hit.transform;
+
+                if (hit.collider.CompareTag("Material"))
+                {
+                    var selectionRenderer = selection.GetComponent<Renderer>();
+                    if (selectionRenderer != null)
+                    {
+                        selectionRenderer.material = highlightMaterial;
+                    }
+
+                    _selection = selection;
+                }
+            }
+
+            PickMaterial myMaterials = gameObject.GetComponent<PickMaterial>();
+
 
             if (Input.GetKeyDown(KeyCode.F))
             {
                 if (hit.collider.CompareTag("Engine"))
                 {
                     CanBeRepaired engine = selection.gameObject.GetComponent<CanBeRepaired>();
-                    engine.repair();
+
+                    if (myMaterials.canIrepair())
+                    {
+                        engine.repair();
+                    }
                 }
             }
-
-           
         }
-        
-        
-        
     }
 }

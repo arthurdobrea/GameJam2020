@@ -5,7 +5,7 @@ using UnityEngine;
 public class PickMaterial : MonoBehaviour
 {
     private int countOfMaterials = 0;
-    
+
     // Update is called once per frame
     void Update()
     {
@@ -19,11 +19,25 @@ public class PickMaterial : MonoBehaviour
                 {
                     if (Vector3.Distance(transform.position, hit.collider.gameObject.transform.position) < 4)
                     {
-                        countOfMaterials++;
+                        
+                        countOfMaterials+=2;
                         Destroy(hit.collider.gameObject);
                     }
                 }
             }
+        }
+    }
+
+    public bool canIrepair()
+    {
+        if (countOfMaterials > 0)
+        {
+            countOfMaterials -= 1;
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }
