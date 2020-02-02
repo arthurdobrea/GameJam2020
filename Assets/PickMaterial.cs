@@ -2,7 +2,7 @@
 
 public class PickMaterial : MonoBehaviour
 {
-    private int countOfMaterials = 0;
+    private static int countOfMaterials = 0;
 
     // Update is called once per frame
     void Update()
@@ -27,6 +27,19 @@ public class PickMaterial : MonoBehaviour
     }
 
     public bool canIrepair()
+    {
+        if (countOfMaterials > 0)
+        {
+            countOfMaterials -= 1;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public static bool repairMySelf()
     {
         if (countOfMaterials > 0)
         {

@@ -37,6 +37,7 @@ public class CanBeRepaired : MonoBehaviour
         }
         else
         {
+            WinCondition.win += 1; 
             repaired = true;
         }
     }

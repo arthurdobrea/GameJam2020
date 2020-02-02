@@ -6403,7 +6403,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 496519915}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &304647742
+--- !u!114 &304647746
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6417,6 +6417,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   generator: {fileID: 0}
   generator2: {fileID: 0}
+--- !u!114 &304647747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304647741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61b21a81253bb1b45a920253409f5e60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightMaterial: {fileID: 2100000, guid: 0be6096d9abf8444ab9cb988f889dc0f, type: 2}
+  defaultMaterial: {fileID: 2100000, guid: 10de6384af0c3b54e8166f9c3f936e88, type: 2}
+  repairedMaterial: {fileID: 2100000, guid: 344ac9821c8964741a06ec390618d7da, type: 2}
 --- !u!1001 &308401543
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10110,6 +10125,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 153876, guid: 14f2f01264616214ba79f88c8f46c15f, type: 3}
       propertyPath: m_Name
+      value: desk
+      objectReference: {fileID: 0}
+    - target: {fileID: 153876, guid: 14f2f01264616214ba79f88c8f46c15f, type: 3}
+      propertyPath: m_TagString
       value: desk
       objectReference: {fileID: 0}
     - target: {fileID: 445452, guid: 14f2f01264616214ba79f88c8f46c15f, type: 3}

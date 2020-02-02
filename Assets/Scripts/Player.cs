@@ -52,6 +52,18 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyUp(KeyCode.R))
+        {
+            if (PickMaterial.repairMySelf())
+            {
+                if (health != maxHealth)
+                {
+                    health += 10;
+                    healthBar.fillAmount = health / maxHealth;
+                }
+            }
+        }
+
         if (!died)
         {
             if (!gameManager.mainMenuPanel.activeSelf && !gameManager.settingsPanel.activeSelf)
