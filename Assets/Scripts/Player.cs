@@ -7,6 +7,8 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class Player : MonoBehaviour
 {
+    public static AudioClip mainTheme;
+    private static AudioSource audioSrc;
     public float moveSpeed;
     public float sensitivity;
     public float health;
@@ -43,11 +45,20 @@ public class Player : MonoBehaviour
         healthBar.fillAmount = 1.0f;
         maxHealth = health;
         died = false;
+        mainTheme = Resources.Load<AudioClip>("mainTheme");
+        audioSrc = GetComponent<AudioSource>();
     }
 
-    
+
     void Update()
     {
+        Debug.Log(audioSrc.isPlaying);
+        
+        if (!audioSrc.isPlaying)
+        {
+            audioSrc.PlayOneShot(mainTheme);
+        }
+
         if (!died)
         {
             if (!gameManager.mainMenuPanel.activeSelf && !gameManager.settingsPanel.activeSelf)
@@ -69,7 +80,6 @@ public class Player : MonoBehaviour
                         {
                             canAttack = false;
                             Debug.Log("Hello");
-
                         }
 
                         StartCoroutine(DoDamage(hit));
@@ -90,8 +100,8 @@ public class Player : MonoBehaviour
             StartCoroutine(Restart());
         }
     }
-    
-    
+
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -145,13 +155,10 @@ public class Player : MonoBehaviour
         //
         // movement = transform.rotation * movement;
         // player.Move(movement * Time.deltaTime);
-
-
-
-
     }
-    
+
     private YieldInstruction fadeInstruction = new YieldInstruction();
+
     IEnumerator FadeOut(Image image)
     {
         float elapsedTime = 0.0f;
@@ -159,12 +166,12 @@ public class Player : MonoBehaviour
         while (elapsedTime < 3)
         {
             yield return fadeInstruction;
-            elapsedTime += Time.deltaTime ;
+            elapsedTime += Time.deltaTime;
             c.a = 1.0f - Mathf.Clamp01(elapsedTime / 3);
             image.color = c;
         }
     }
-    
+
     IEnumerator FadeIn(Image image)
     {
         float elapsedTime = 0.0f;
@@ -172,7 +179,7 @@ public class Player : MonoBehaviour
         while (elapsedTime < 3)
         {
             yield return fadeInstruction;
-            elapsedTime += Time.deltaTime ;
+            elapsedTime += Time.deltaTime;
             c.a = Mathf.Clamp01(elapsedTime / 3);
             image.color = c;
         }
@@ -186,7 +193,6 @@ public class Player : MonoBehaviour
 
     IEnumerator DoDamage(RaycastHit hit)
     {
-        
         float distance = Vector3.Distance(this.transform.position, hit.point);
         if (distance <= 2)
         {
@@ -197,6 +203,7 @@ public class Player : MonoBehaviour
                 hit.transform.gameObject.GetComponent<Enemy>().TakeDamage(damage);
             }
         }
+
         yield return new WaitForSeconds(3);
         canAttack = true;
     }
@@ -213,6 +220,7 @@ public class Player : MonoBehaviour
                 StartCoroutine(FadeIn(youDied));
                 gameObject.GetComponent<FirstPersonController>().enabled = false;
             }
+
             StartCoroutine(FadeOut(damageScreen));
         }
     }

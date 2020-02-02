@@ -14,7 +14,8 @@ public class SoundManager : MonoBehaviour
         punch2,
         die,
         take,
-        engine;
+        engine,
+        mainTheme;
 
     private static AudioSource audioSrc;
 
@@ -32,6 +33,7 @@ public class SoundManager : MonoBehaviour
         die = Resources.Load<AudioClip>("die");
         take = Resources.Load<AudioClip>("take1");
         engine = Resources.Load<AudioClip>("EngineTrying");
+        mainTheme = Resources.Load<AudioClip>("mainTheme");
 
         audioSrc = GetComponent<AudioSource>();
     }
@@ -54,6 +56,7 @@ public class SoundManager : MonoBehaviour
             }
             case "hitSound":
             {
+                audioSrc.volume = 0.5f;
                 int range = Random.Range(1, 3);
                 switch (@range)
                 {
