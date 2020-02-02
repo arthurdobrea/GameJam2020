@@ -42,21 +42,25 @@ public class SoundManager : MonoBehaviour
     {
         switch (clip)
         {
-            case "engine": {
+            case "engine":
+            {
                 audioSrc.PlayOneShot(engine);
                 break;
             }
-            case "take": {
+            case "take":
+            {
                 audioSrc.PlayOneShot(take);
                 break;
             }
-            case "die": {
+            case "die":
+            {
+                audioSrc.volume = 1f;
                 audioSrc.PlayOneShot(die);
                 break;
             }
             case "hitSound":
             {
-                audioSrc.volume = 0.5f;
+                audioSrc.volume = 1f;
                 int range = Random.Range(1, 3);
                 switch (@range)
                 {
@@ -76,6 +80,7 @@ public class SoundManager : MonoBehaviour
                         break;
                     }
                 }
+
                 break;
             }
             case "takeMaterialHitSound":
@@ -87,18 +92,19 @@ public class SoundManager : MonoBehaviour
             {
                 if (!audioSrc.isPlaying)
                 {
-                    
                 }
+
                 audioSrc.PlayOneShot(playerHitSound);
                 break;
             }
             case "robMoving":
             {
-                audioSrc.volume = 0.05f;
+                audioSrc.volume = 0.1f;
                 if (!audioSrc.isPlaying)
                 {
                     audioSrc.PlayOneShot(robMoving);
                 }
+
                 break;
             }
         }

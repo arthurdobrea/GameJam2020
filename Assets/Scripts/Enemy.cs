@@ -27,16 +27,15 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (playerToFollow == null)
+        {
+            playerToFollow =  GameObject.Find("FPSController");
+        }
+        
         playerScript = playerToFollow.GetComponent<Player>();
         agent.GetComponent<NavMeshAgent>();
         animator.GetComponent<Animator>();
         animator.Play("Idle");
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, agroRadius / 2);
     }
 
     private void Scout()

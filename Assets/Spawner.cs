@@ -7,6 +7,7 @@ public class Spawner : MonoBehaviour
 {
     public GameObject enemy;
     private float timer = 0;
+    public float maxValue;
     
     
     // Start is called before the first frame update
@@ -18,7 +19,7 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timer >= 10)
+        if (timer >= maxValue)
         {
             Instantiate(enemy, transform.position, transform.rotation);
             timer = 0;

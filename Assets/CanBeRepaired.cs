@@ -26,7 +26,6 @@ public class CanBeRepaired : MonoBehaviour
             {
                 audioSrc.PlayOneShot(workingEngine);
             }
-
         }
     }
 

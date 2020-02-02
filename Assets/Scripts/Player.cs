@@ -52,13 +52,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(audioSrc.isPlaying);
-        
-        if (!audioSrc.isPlaying)
-        {
-            audioSrc.PlayOneShot(mainTheme);
-        }
-
         if (!died)
         {
             if (!gameManager.mainMenuPanel.activeSelf && !gameManager.settingsPanel.activeSelf)
