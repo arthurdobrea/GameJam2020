@@ -1,29 +1,14 @@
 fileFormatVersion: 2
-guid: 42bb7900e438f924887ee09645cf6cf6
+guid: d9fa5116eaa930d4d85dd2efaa9bf1b5
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
   - first:
-      74: -5391106574607003287
-    second: BassHammerHandle|BassHammerHandleAction
+      74: 5656652353858649907
+    second: Idle
   - first:
-      74: -8269794555851981389
-    second: BassHammerHandle|BassHammerHandleAction.001
-  - first:
-      74: 6662085259246865222
-    second: BassHammerHandle|BassHammerHandleAction.002
-  - first:
-      74: -7807885149407560647
+      74: -4891365001064361813
     second: Attack
-  - first:
-      74: 2864002501092685779
-    second: BassHammerHandle|BassHammerTopAction
-  - first:
-      74: -1624526775650445582
-    second: BassHammerHandle|BassHammerTopAction.001
-  - first:
-      74: -8534280837883137510
-    second: BassHammerHandle|BassHammerTopAction.002
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -54,17 +39,46 @@ ModelImporter:
     clipAnimations:
     - serializedVersion: 16
       name: Attack
-      takeName: BassHammerHandle|BassHammerHandleAction.003
+      takeName: Circle.003|Circle.003Action
       internalID: 0
       firstFrame: 0
-      lastFrame: 59
+      lastFrame: 48
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle
+      takeName: Circle.003|Circle.003Action
+      internalID: 0
+      firstFrame: 79
+      lastFrame: 79
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -84,7 +98,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.1
+    globalScale: 0.0003
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -131,7 +145,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.1
+    globalScale: 0.0003
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

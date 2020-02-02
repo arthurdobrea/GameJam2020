@@ -106,17 +106,21 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        health -= damage;
-        Debug.Log(health);
-        if (health <= 0)
+        if (!dead)
         {
-            SoundManager.playSound("die");
-            animator.Play("Death");
-            dead = true;
-            agent.Stop();
-            Instantiate(drop);
-            drop.transform.position = transform.position;
-            drop.GetComponent<Rigidbody>().AddForce(transform.up * 1);
+            health -= damage;
+            Debug.Log(health);
+            if (health <= 0)
+            {
+                transform.gameObject.GetComponent<CapsuleCollider>().enabled = false;
+                SoundManager.playSound("die");
+                animator.Play("Death");
+                dead = true;
+                agent.Stop();
+                Instantiate(drop);
+                drop.transform.position = transform.position;
+                drop.GetComponent<Rigidbody>().AddForce(transform.up * 1);
+            }
         }
     }
 

@@ -23,12 +23,21 @@ public class Player : MonoBehaviour
     private float rotY;
     public GameManager gameManager;
 
+    private Animator weaponAnim;
+
+    public Image healthBar;
+    private float maxHealth;
+
     void Start()
     {
         var tempColor = damageScreen.color;
         tempColor.a = 0f;
         damageScreen.color = tempColor;
         // player = GetComponent<CharacterController>();
+        weaponAnim = weapon.GetComponent<Animator>();
+        weaponAnim.Play("Idle");
+        healthBar.fillAmount = 1.0f;
+        maxHealth = health;
     }
 
     
@@ -48,15 +57,16 @@ public class Player : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity))
                 {
-                    weapon.transform.localPosition += Vector3.forward / 6;
+                    weaponAnim.Play("Attack");
+                    if (canAttack)
+                    {
+                        canAttack = false;
+                        Debug.Log("Hello");
+                        
+                    }
 
                     StartCoroutine(DoDamage(hit));
                 }
-            }
-
-            if (Input.GetMouseButtonUp(0))
-            {
-                weapon.transform.localPosition += Vector3.back / 6;
             }
         }
         else
@@ -145,28 +155,24 @@ public class Player : MonoBehaviour
     
     IEnumerator DoDamage(RaycastHit hit)
     {
-        SoundManager.playSound("hitSound");
+        
         float distance = Vector3.Distance(this.transform.position, hit.point);
         if (distance <= 2)
         {
             if (hit.transform.gameObject.tag.Equals("Enemy"))
             {
-                if (canAttack)
-                {
-                    // SoundManager.playSound("playerHitSound");
-                    canAttack = false;
-                    hit.transform.gameObject.GetComponent<Enemy>().TakeDamage(damage);
-                    yield return new WaitForSeconds(1);
-                    canAttack = true;
-                }
-                    
+                SoundManager.playSound("hitSound");
+                // SoundManager.playSound("playerHitSound");
+                hit.transform.gameObject.GetComponent<Enemy>().TakeDamage(damage);
             }
         }
+        yield return new WaitForSeconds(3);
+        canAttack = true;
     }
 
     public void TakeDamage(float damage)
     {
-        
+        healthBar.fillAmount = health / maxHealth;
         var tempColor = damageScreen.color;
         tempColor.a = 1f;
         damageScreen.color = tempColor;
