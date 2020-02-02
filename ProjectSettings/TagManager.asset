@@ -8,6 +8,7 @@ TagManager:
   - Material
   - Engine
   - Player1
+  - Informable
   layers:
   - Default
   - TransparentFX
