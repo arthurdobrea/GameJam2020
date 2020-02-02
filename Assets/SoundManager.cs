@@ -66,16 +66,19 @@ public class SoundManager : MonoBehaviour
                 {
                     case 1:
                     {
+                        audioSrc.volume = 1f;
                         audioSrc.PlayOneShot(punch0);
                         break;
                     }
                     case 2:
                     {
+                        audioSrc.volume = 1f;
                         audioSrc.PlayOneShot(punch1);
                         break;
                     }
                     case 3:
                     {
+                        audioSrc.volume = 1f;
                         audioSrc.PlayOneShot(punch2);
                         break;
                     }
