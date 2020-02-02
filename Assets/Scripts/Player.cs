@@ -70,8 +70,8 @@ public class Player : MonoBehaviour
             {
                 if (Input.GetKeyUp(KeyCode.Escape))
                 {
-                    Cursor.visible = false;
-                    gameObject.GetComponent<FirstPersonController>().enabled = true;
+                    Cursor.visible = true;
+                    gameObject.GetComponent<FirstPersonController>().enabled = false;
                 }
 
                 if (Input.GetMouseButtonDown(0))
@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
                 if (Input.GetKeyUp(KeyCode.Escape))
                 {
                     Cursor.visible = true;
-                    gameObject.GetComponent<FirstPersonController>().enabled = false;
+                    gameObject.GetComponent<FirstPersonController>().enabled = true;
                 }
             }
         }
