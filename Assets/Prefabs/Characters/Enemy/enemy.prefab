@@ -4435,6 +4435,7 @@ MonoBehaviour:
   - {fileID: 0}
   attackSpeed: 3
   animator: {fileID: 3400057597890785098}
+  damage: 30
   health: 50
   currentLocationToScout: {fileID: 0}
   drop: {fileID: 9199150776701211191, guid: cd4b71b0f3ca1344a94998706f1c878c, type: 3}

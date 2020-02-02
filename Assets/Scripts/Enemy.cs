@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     public GameObject[] positionsToScout;
     public float attackSpeed;
     public Animator animator;
+    public float damage;
 
     private Vector3 selfPosition;
     private Vector3 playerPosition;
@@ -77,7 +78,7 @@ public class Enemy : MonoBehaviour
                 {
                     if (attackSpeed >= 3)
                     {
-                        DoDamage(10);
+                        DoDamage(damage);
                         attackSpeed = 0;
                     }
                     else

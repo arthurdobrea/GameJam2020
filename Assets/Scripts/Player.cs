@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityStandardAssets.Characters.FirstPerson;
 
@@ -22,11 +23,14 @@ public class Player : MonoBehaviour
     private float rotX;
     private float rotY;
     public GameManager gameManager;
+    public Image youDied;
 
     private Animator weaponAnim;
 
     public Image healthBar;
     private float maxHealth;
+
+    private bool died;
 
     void Start()
     {
@@ -38,44 +42,52 @@ public class Player : MonoBehaviour
         weaponAnim.Play("Idle");
         healthBar.fillAmount = 1.0f;
         maxHealth = health;
+        died = false;
     }
 
     
     void Update()
     {
-        if (!gameManager.mainMenuPanel.activeSelf && !gameManager.settingsPanel.activeSelf)
+        if (!died)
         {
-            if (Input.GetKeyUp(KeyCode.Escape))
+            if (!gameManager.mainMenuPanel.activeSelf && !gameManager.settingsPanel.activeSelf)
             {
-                Cursor.visible = false;
-                gameObject.GetComponent<FirstPersonController>().enabled = true;
-            }
-            
-            if (Input.GetMouseButtonDown(0))
-            {
-                Ray ray = cam.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+                if (Input.GetKeyUp(KeyCode.Escape))
                 {
-                    weaponAnim.Play("Attack");
-                    if (canAttack)
-                    {
-                        canAttack = false;
-                        Debug.Log("Hello");
-                        
-                    }
+                    Cursor.visible = false;
+                    gameObject.GetComponent<FirstPersonController>().enabled = true;
+                }
 
-                    StartCoroutine(DoDamage(hit));
+                if (Input.GetMouseButtonDown(0))
+                {
+                    Ray ray = cam.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
+                    RaycastHit hit;
+                    if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+                    {
+                        weaponAnim.Play("Attack");
+                        if (canAttack)
+                        {
+                            canAttack = false;
+                            Debug.Log("Hello");
+
+                        }
+
+                        StartCoroutine(DoDamage(hit));
+                    }
+                }
+            }
+            else
+            {
+                if (Input.GetKeyUp(KeyCode.Escape))
+                {
+                    Cursor.visible = true;
+                    gameObject.GetComponent<FirstPersonController>().enabled = false;
                 }
             }
         }
         else
         {
-            if (Input.GetKeyUp(KeyCode.Escape))
-            {
-                Cursor.visible = true;
-                gameObject.GetComponent<FirstPersonController>().enabled = false;
-            }
+            StartCoroutine(Restart());
         }
     }
     
@@ -153,6 +165,25 @@ public class Player : MonoBehaviour
         }
     }
     
+    IEnumerator FadeIn(Image image)
+    {
+        float elapsedTime = 0.0f;
+        Color c = image.color;
+        while (elapsedTime < 3)
+        {
+            yield return fadeInstruction;
+            elapsedTime += Time.deltaTime ;
+            c.a = Mathf.Clamp01(elapsedTime / 3);
+            image.color = c;
+        }
+    }
+
+    IEnumerator Restart()
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("EngineRoom");
+    }
+
     IEnumerator DoDamage(RaycastHit hit)
     {
         
@@ -172,15 +203,17 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        healthBar.fillAmount = health / maxHealth;
-        var tempColor = damageScreen.color;
-        tempColor.a = 1f;
-        damageScreen.color = tempColor;
-        health -= damage;
-        if (health <= 0)
+        if (!died)
         {
-            Application.Quit();
+            health -= damage;
+            healthBar.fillAmount = health / maxHealth;
+            if (health <= 0)
+            {
+                died = true;
+                StartCoroutine(FadeIn(youDied));
+                gameObject.GetComponent<FirstPersonController>().enabled = false;
+            }
+            StartCoroutine(FadeOut(damageScreen));
         }
-        StartCoroutine(FadeOut(damageScreen));
     }
 }
