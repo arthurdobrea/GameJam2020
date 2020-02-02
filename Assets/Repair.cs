@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class Repair : MonoBehaviour
 {
@@ -10,8 +12,29 @@ public class Repair : MonoBehaviour
 
     private Transform _selection;
 
+    public GameObject winc;
+    
+    public Image winImage;
+    
+
+
     void Start()
     {
+    }
+    
+    private YieldInstruction fadeInstruction = new YieldInstruction();
+
+    IEnumerator FadeIn(Image image)
+    {
+        float elapsedTime = 0.0f;
+        Color c = image.color;
+        while (elapsedTime < 3)
+        {
+            yield return fadeInstruction;
+            elapsedTime += Time.deltaTime;
+            c.a = Mathf.Clamp01(elapsedTime / 3);
+            image.color = c;
+        }
     }
 
     // Update is called once per frame
@@ -58,7 +81,7 @@ public class Repair : MonoBehaviour
                 {
                     CanBeRepaired engine = selection.gameObject.GetComponent<CanBeRepaired>();
 
-                    if (WinCondition.win == 2)
+                    if (winc.GetComponent<WinCondition>().win == 2)
                     {
                         selectionRenderer.material = repairedMaterial;
                     }
@@ -88,7 +111,32 @@ public class Repair : MonoBehaviour
             }
 
             PickMaterial myMaterials = gameObject.GetComponent<PickMaterial>();
-
+            
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                if (Physics.Raycast(ray, out hit))
+                {
+                    if (hit.collider.CompareTag("desk"))
+                    {
+                        if (Vector3.Distance(transform.position, hit.collider.gameObject.transform.position) < 4)
+                        {
+                            if (winc.GetComponent<WinCondition>().win == 2)
+                            {
+                                StartCoroutine(FadeIn(winImage));
+                                transform.GetComponent<FirstPersonController>().enabled = false;
+                                if (Input.GetKeyDown(KeyCode.Escape))
+                                {
+                                    Application.Quit();
+                                }
+                            }
+                            else
+                            {
+                                Debug.Log("Nope");
+                            }
+                        }
+                    }
+                }
+            }
 
             if (Input.GetKeyDown(KeyCode.F))
             {

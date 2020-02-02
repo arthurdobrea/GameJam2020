@@ -8,7 +8,7 @@ public class CanBeRepaired : MonoBehaviour
     private bool repaired = false;
     public static AudioClip workingEngine;
     private static AudioSource audioSrc;
-
+    public GameObject winc;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +37,9 @@ public class CanBeRepaired : MonoBehaviour
         }
         else
         {
-            WinCondition.win += 1; 
+            
+            winc.GetComponent<WinCondition>().win += 1;
+            Debug.Log(winc.GetComponent<WinCondition>().win);
             repaired = true;
         }
     }
